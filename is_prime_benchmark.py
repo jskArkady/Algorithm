@@ -86,9 +86,9 @@ def benchmark_algorithm(algo_func, test_numbers, algo_name, results):
         'prime_count': prime_count
     }
     
-    print(f"{algo_name} 완료: {execution_time:.6f}초, 소수 개수: {prime_count}")
+    print(f"{algo_name} 완료: {execution_time:.4f}초, 소수 개수: {prime_count}")
 
-def run_benchmark(test_range=None, num_tests=100):
+def run_benchmark(test_range=None, num_tests=10000):
     """벤치마크 실행 함수"""
     if test_range is None:
         # 기본 테스트 범위: 작은 수, 중간 수, 큰 수
@@ -136,7 +136,7 @@ def run_benchmark(test_range=None, num_tests=100):
     
     # 가장 빠른 알고리즘 찾기
     fastest = min(results, key=lambda x: results[x]['time'])
-    print(f"\n가장 빠른 알고리즘: {fastest} ({results[fastest]['time']:.6f}초)")
+    print(f"\n가장 빠른 알고리즘: {fastest} ({results[fastest]['time']:.4f}초)")
     
     # 소수 개수 일치 여부 확인
     prime_counts = [data['prime_count'] for data in results.values()]
@@ -151,15 +151,15 @@ def run_benchmark(test_range=None, num_tests=100):
 
 if __name__ == "__main__":
     # 임의의 테스트 세트 생성을 위한 시드 설정 (결과 재현 가능)
-    random.seed(42)
+    # random.seed(42)
     
     # 작은 수부터 큰 수까지 다양한 범위의 숫자로 테스트
     print("==== 다양한 크기의 숫자 테스트 ====")
     run_benchmark()
     
     # 작은 숫자만 테스트
-    print("\n\n==== 작은 숫자 테스트 (2-1,000) ====")
-    run_benchmark(test_range=(2, 1000), num_tests=1000)
+    print("\n\n==== 작은 숫자 테스트 (2-100,000) ====")
+    run_benchmark(test_range=(2, 100000), num_tests=100000)
     
     # 큰 숫자만 테스트
     print("\n\n==== 큰 숫자 테스트 (1,000,000,000-10,000,000,000) ====")
